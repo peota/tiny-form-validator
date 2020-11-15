@@ -34,7 +34,12 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 
         phone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-        name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/
+        name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/,
+        creditCard: [{ visa: /^(?:4[0-9]{12}(?:[0-9]{3})?)$/ },
+        { masterCard: /^(?:5[1-5][0-9]{14})$/ },
+        { amexp: /^(?:3[47][0-9]{13})$/ },
+        { discov: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/ },
+        ]
     };
 
     // // store custom erros messages
@@ -127,9 +132,9 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
     function submitForm(e) {
 
-        e.preventDefault(); // prevent form submission
-        valid = true; // reset the valid flag at form submission
-        resetErrors(); // clean all error messages
+        e.preventDefault();   // prevent form submission
+        valid = true;        // reset the valid flag at form submission
+        resetErrors();      // clean all error messages
 
         // check options and run the needed validations
         if (options.checkRequired) checkRequired();

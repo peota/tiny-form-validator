@@ -1,4 +1,4 @@
-**A Tiny JavaScript Form Validator**
+**A Tiny JavaScript Form Validator (still in development)**
 ---
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/480px-Unofficial_JavaScript_logo_2.svg.png" alt="drawing" width="80"/>
 
