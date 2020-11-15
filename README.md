@@ -8,7 +8,7 @@
  - Validate phone number
  - Validate credit card number
  - Validate names (full names)
- - Validate dates (soon)
+ - Validate dates
  - Validate min max (soon)
  - Display errors on field inputs
 
@@ -22,6 +22,7 @@ initialize the validator with the **form element**
     const validator = new FormValidator(formEle);
 
 **Options**
+
     You can change the default options by passing **options object** as second argument
 
     checkRequired: true / false
