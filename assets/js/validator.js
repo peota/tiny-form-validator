@@ -16,7 +16,8 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         ignoreClassName: userOptions.ignoreClassName === undefined ? "ignore" : userOptions.ignoreClassName,
         validateEmail: userOptions.validateEmail === undefined ? true : userOptions.validate,
         validatePhone: userOptions.validatePhone === undefined ? true : userOptions.validatePhone,
-        validateFullName: userOptions.validateFullName === undefined ? false : userOptions.validateFullName
+        validateFullName: userOptions.validateFullName === undefined ? false : userOptions.validateFullName,
+        validateCreditCard: userOptions.validateCreditCard === undefined ? false : userOptions.validateCreditCard
 
     };
 
@@ -35,10 +36,10 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
         phone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/,
-        creditCard: [{ visa: /^(?:4[0-9]{12}(?:[0-9]{3})?)$/ },
-        { masterCard: /^(?:5[1-5][0-9]{14})$/ },
-        { amexp: /^(?:3[47][0-9]{13})$/ },
-        { discov: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/ },
+        creditCards: [{ regex: /^(?:4[0-9]{12}(?:[0-9]{3})?)$/, cardName: "visa" },
+        { regex: /^(?:5[1-5][0-9]{14})$/, cardName: "master card" },
+        { regex: /^(?:3[47][0-9]{13})$/, cardName: "american express" },
+        { regex: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/, cardName: "discover" },
         ]
     };
 
@@ -103,7 +104,6 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     }
 
     function validateFullName() {
-
         const searchName = fields.filter((field) => {
             return field.name === 'firstName' || field.name === 'lastName';
         });
@@ -113,6 +113,30 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
             if (!regex.name.test(String(fullName).toLowerCase())) {
                 showError(searchName[0], 'Name is not valid.');
                 showError(searchName[1], 'Name is not valid.');
+            }
+        }
+    }
+
+    function validateCC() {
+        const searchCCField = fields.filter((field) => {
+            return field.name === options.validateCreditCard.fieldName;
+        });
+
+        if (searchCCField.length === 1 && searchCCField[0].value !== '') {
+            const ccNum = searchCCField[0].value;
+            let cardName = null;
+            for (let card of regex.creditCards) {
+                if (card.regex.test(String(ccNum).toLowerCase())) {
+                    cardName = card.cardName;
+                    break;
+                }
+            }
+            if (cardName === null) {
+                valid = false;
+                showError(searchCCField[0], 'Card is not valid.');
+            }
+            else {
+                console.log(cardName);
             }
         }
     }
@@ -144,6 +168,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         if (options.validateEmail) validateEmail();
         if (options.validatePhone) validatePhoneNumber();
         if (options.validateFullName) validateFullName();
+        if (options.validateCreditCard) validateCC();
 
         console.log(valid)
 

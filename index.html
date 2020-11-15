@@ -42,12 +42,8 @@
               <small></small>
             </div>
             <div class="form-group">
-              <label for="country">Country:</label>
-              <select class="form-control" name="country" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="1">3</option>
-              </select>
+              <label for="country">Credit Card:</label>
+              <input type="text" class="form-control" name="ccnum" required />
               <small></small>
             </div>
             <div class="form-group">
@@ -84,7 +80,9 @@
     crossorigin="anonymous"></script>
   <script src="assets/js/validator.js"></script>
   <script>
-    const validator = new FormValidator(document.getElementById("myForm"));
+    const validator = new FormValidator(document.getElementById("myForm"),
+      { validateCreditCard: { fieldName: 'ccnum' } }
+    );
   </script>
 </body>
 
