@@ -16,7 +16,10 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     let valid = true;
 
     // extract all fields from the form, return only input fields (exclude the buttons)
-    const fields = [...form.elements].filter((field) => { return field.tagName !== "BUTTON" });
+    const fields = [...form.elements].filter((field) => {
+        return field.tagName !== "BUTTON" &&
+            field.classList.contains(options.ignoreClassName) === false
+    });
 
     // storing regex validation codes
     const regex = {
@@ -46,10 +49,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
     function checkRequired() {
         let requiredFields = fields.filter((field) => {
-            return (field.hasAttribute('required') && options.checkRequired === true
-                &&
-                field.classList.contains(options.ignoreClassName) === false
-            );
+            return (field.hasAttribute('required') && options.checkRequired === true);
         });
         for (let field of requiredFields) {
             if (field.value === '') {
@@ -93,7 +93,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         const searchName = fields.filter((field) => {
             return field.name === 'firstName' || field.name === 'lastName';
         });
-        if (searchName.length === 2) {
+        if (searchName.length === 2 && searchName[0].value !== '' && searchName[1].value !== '') {
             const fullName = `${searchName[0].value} ${searchName[1].value}`
 
             if (!regex.name.test(String(fullName).toLowerCase())) {
