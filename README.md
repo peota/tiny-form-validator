@@ -12,6 +12,7 @@
  - Display errors on field inputs
 
 **How to Use?**
+--
 
 Just include the **validator.js** in your project,
 initialize the validator with the **form element**
@@ -20,7 +21,16 @@ initialize the validator with the **form element**
     const validator = new FormValidator(formEle);
     
 **Options**
+    You can change the default options by passing **options object** as second argument
+   
+    checkRequired: true / false
+	checkValues: [{fieldName: 'age', value:30}]
+	ignoreClassName: 'ignoreMe'
+    validateEmail: true / false
+    validatePhone: true / false
+    validateFullName: true / false
     
+E.g - `const validator = new FormValidator(formEle, {validateEmail:false});`
     
 **Form Structure**
 Used with [Bootstrap 4](https://getbootstrap.com/)
