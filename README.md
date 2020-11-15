@@ -4,9 +4,42 @@
 
 **Main Features:**
  - Validate required fields
- - Validate email address (regex)
- - Validate phone number (regex)
- - Validate credit card number (regex)
- - Validate names (full names) (regex)
+ - Validate email address 
+ - Validate phone number 
+ - Validate credit card number 
+ - Validate names (full names) 
  - Validate integers values (< > = )
  - Display errors on field inputs
+
+**How to Use?**
+Just include the **validator.js** in your project,
+initialize the validator with the **form element**
+	
+    const formEle = document.getElementById('myForm);
+    const validator = new FormValidator(formEle);
+    
+**Options**
+    
+    
+**Form Structure**
+Used with [Bootstrap 4](https://getbootstrap.com/)
+
+**Example for the HTML structure of an input**
+
+    <div class="form-group">
+	    <label for="fname">First Name:</label>
+	    <input type="text" class="form-control" name="firstName" required />
+	    <small></small>
+    </div>
+    
+   **Checkbox structure** 
+
+    <div class="form-group">
+	    <div class="form-check">
+		    <input class="form-check-input" type="checkbox" value="yes" required />
+		    <label class="form-check-label" for="defaultCheck1"> Yes </label>
+	    </div>
+	    <small></small>
+    </div>
+
+    
