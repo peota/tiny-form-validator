@@ -17,7 +17,7 @@
 Just include the **validator.js** in your project,
 initialize the validator with the **form element**
 
-    const formEle = document.getElementById('myForm);
+    const formEle = document.getElementById('myForm');
     const validator = new FormValidator(formEle);
 
 **Options**
