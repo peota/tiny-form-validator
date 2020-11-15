@@ -110,9 +110,8 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
             return field.name === fieldName;
         });
         if (searchField.length === 0) {
-            valid = false;
-            throw new Error('Field Not Found');
-        } else if (searchField[0].value < value) {
+            throw new Error(`Field: '${fieldName}' not found.`);
+        } else if (searchField[0].value !== '' && searchField[0].value < value) {
             showError(searchField[0], 'This field value has to be greater or equal to ' + value);
             valid = false;
         }
@@ -122,16 +121,16 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
         e.preventDefault();
         valid = true; // reset the valid flag at form submission
-        resetErrors();
+        resetErrors(); // clean all error messages
 
-        // check options and run the needed validation function
-        if (options.checkRequired === true) checkRequired();
+        // check options and run the needed validations
+        if (options.checkRequired) checkRequired();
         if (options.checkValues.length > 0) {
-            options.checkValues.forEach((field) => { checkValue(field.fieldName, field.value); });
+            options.checkValues.forEach(field => checkValue(field.fieldName, field.value));
         }
-        if (options.validateEmail === true) validateEmail();
-        if (options.validatePhone === true) validatePhoneNumber();
-        if (options.validateFullName === true) validateFullName();
+        if (options.validateEmail) validateEmail();
+        if (options.validatePhone) validatePhoneNumber();
+        if (options.validateFullName) validateFullName();
         console.log(valid);
     }
 
