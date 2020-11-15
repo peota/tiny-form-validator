@@ -19,7 +19,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         validateDate: userOptions.validateDate === undefined ? true : userOptions.validateDate,
         checkValues: userOptions.checkValues === undefined ? [] : userOptions.checkValues,
         ignoreClassName: userOptions.ignoreClassName === undefined ? "ignore" : userOptions.ignoreClassName,
-        displayErrors: userOptions.displayErrors === undefined ? true : userOptions.displayErrors,
+        displayErrors: userOptions.displayErrors === undefined ? true : userOptions.displayErrors
 
     };
 
