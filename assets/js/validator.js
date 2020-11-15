@@ -119,7 +119,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
     function submitForm(e) {
 
-        e.preventDefault();
+        e.preventDefault(); // prevent form submission
         valid = true; // reset the valid flag at form submission
         resetErrors(); // clean all error messages
 
@@ -131,7 +131,10 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         if (options.validateEmail) validateEmail();
         if (options.validatePhone) validatePhoneNumber();
         if (options.validateFullName) validateFullName();
-        console.log(valid);
+
+        console.log(valid)
+
+        if (valid) form.submit();
     }
 
     // event listeners
