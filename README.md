@@ -4,10 +4,10 @@
 
 **Main Features:**
  - Validate required fields
- - Validate email address 
- - Validate phone number 
- - Validate credit card number 
- - Validate names (full names) 
+ - Validate email address
+ - Validate phone number
+ - Validate credit card number
+ - Validate names (full names)
  - Validate integers values (< > = )
  - Display errors on field inputs
 
@@ -16,22 +16,22 @@
 
 Just include the **validator.js** in your project,
 initialize the validator with the **form element**
-	
+
     const formEle = document.getElementById('myForm);
     const validator = new FormValidator(formEle);
-    
+
 **Options**
     You can change the default options by passing **options object** as second argument
-   
+
     checkRequired: true / false
 	checkValues: [{fieldName: 'age', value:30}]
 	ignoreClassName: 'ignoreMe'
     validateEmail: true / false
     validatePhone: true / false
     validateFullName: true / false
-    
+
 E.g - `const validator = new FormValidator(formEle, {validateEmail:false});`
-    
+
 **Form Structure**
 Used with [Bootstrap 4](https://getbootstrap.com/)
 
@@ -42,8 +42,8 @@ Used with [Bootstrap 4](https://getbootstrap.com/)
 	    <input type="text" class="form-control" name="firstName" required />
 	    <small></small>
     </div>
-    
-   **Checkbox structure** 
+
+   **Checkbox structure**
 
     <div class="form-group">
 	    <div class="form-check">
@@ -53,4 +53,4 @@ Used with [Bootstrap 4](https://getbootstrap.com/)
 	    <small></small>
     </div>
 
-    
+
