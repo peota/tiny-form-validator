@@ -1,4 +1,4 @@
-function FormValidator(form, userOptions = { checkRequired: true, }) {
+function FormValidator(form, userOptions = {}) {
 
     // check if form element provided
     (function () {
@@ -70,9 +70,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     }
 
     function checkRequired() {
-        let requiredFields = fields.filter((field) => {
-            return (field.hasAttribute('required') && options.checkRequired === true);
-        });
+        let requiredFields = fields.filter(field => field.hasAttribute('required'));
         for (let field of requiredFields) {
             if (field.value === '') {
                 showError(field, 'This field is required.');
@@ -86,9 +84,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     }
 
     function validateEmail() {
-        const searchEmail = fields.filter((field) => {
-            return field.type === 'email';
-        });
+        const searchEmail = fields.filter(field => field.type === 'email');
 
         if (searchEmail.length !== 0 && searchEmail[0].value !== "") {
             const emailAddress = searchEmail[0].value;
@@ -125,9 +121,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     }
 
     function validateCC() {
-        const searchCCField = fields.filter((field) => {
-            return field.name === options.validateCreditCard.fieldName;
-        });
+        const searchCCField = fields.filter(field => field.name === options.validateCreditCard.fieldName);
 
         if (searchCCField.length === 1 && searchCCField[0].value !== '') {
             const ccNum = searchCCField[0].value;
@@ -152,9 +146,8 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         const searchDateFields = fields.filter((field) => {
             return field.type === 'date';
         });
-
         if (searchDateFields.length > 0 && (searchDateFields.every(date => date.value !== ''))) {
-            searchDates.forEach((date) => {
+            searchDateFields.forEach((date) => {
                 console.log(date.value)
                 if (!regex.date.test(String(moment(date.value).format('DD-MM-YYYY')).toLowerCase())) {
                     showError(date, 'Date is not valid.');
@@ -184,7 +177,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         resetErrors();      // clean all error messages
 
         // check options and run the needed validations
-        if (options.checkRequired) checkRequired();
+        if (options.checkRequired === true) checkRequired();
         if (options.checkValues.length > 0) {
             options.checkValues.forEach(field => checkValue(field.fieldName, field.value));
         }
