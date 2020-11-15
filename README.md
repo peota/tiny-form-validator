@@ -8,7 +8,7 @@
  - Validate phone number
  - Validate credit card number
  - Validate names (full names)
- - Validate fields equivalent
+ - Validate integers values (< > = )
  - Display errors on field inputs
 
 **How to Use?**
@@ -17,15 +17,15 @@
 Just include the **validator.js** in your project,
 initialize the validator with the **form element**
 
-    const formEle = document.getElementById('myForm');
+    const formEle = document.getElementById('myForm);
     const validator = new FormValidator(formEle);
 
 **Options**
     You can change the default options by passing **options object** as second argument
 
     checkRequired: true / false
-	checkValues: [{fieldName: 'age', value:30}]
-	ignoreClassName: 'ignoreMe'
+	checkValues: [{fieldName: 'age', value:30}] // array of objects
+	ignoreClassName: 'ignoreMe' // fields with this class name will not be validate
     validateEmail: true / false
     validatePhone: true / false
     validateFullName: true / false
