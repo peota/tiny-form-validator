@@ -8,7 +8,7 @@
  - Validate phone number
  - Validate credit card number
  - Validate names (full names)
- - Validate integers values (< > = )
+ - Validate fields equivalent
  - Display errors on field inputs
 
 **How to Use?**
