@@ -2,84 +2,90 @@
 <html lang="en">
 
 <head>
-    <title>Tiny Form Validator</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Tiny Form Validator</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-    <div class="container d-flex justify-content-center align-items-center mt-5">
-        <div class="w-50">
-            <form id="myForm" action="" method="post">
-                <div class="form-group">
-                    <label for="fname">First Name:</label>
-                    <input type="text" class="form-control" name="firstName" required />
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" class="form-control" name="lastName" required />
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <label for="lname">Email:</label>
-                    <input type="email" class="form-control" name="email" required />
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone:</label>
-                    <input type="tel" class="form-control" name="phone" required />
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <label for="country">Country:</label>
-                    <select class="form-control" name="country" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="1">3</option>
-                    </select>
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <label for="lname">Age:</label>
-                    <input type="number" class="form-control" name="age" required />
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="yes" required />
-                        <label class="form-check-label" for="defaultCheck1"> Yes </label>
-                    </div>
-                    <small></small>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-            </form>
+<body class="bg-light">
+  <div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="w-50">
+      <div class="card p-4">
+        <div class="card-body">
+          <h3 class="mb-3 text-left">Example Form</h3>
+          <hr>
+          <form id="myForm" action="" method="post">
+            <div class="form-group">
+              <label for="fname">First Name:</label>
+              <input type="text" class="form-control" name="firstName" required />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name:</label>
+              <input type="text" class="form-control" name="lastName" required />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="lname">Email:</label>
+              <input type="email" class="form-control" name="email" required />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="tel" class="form-control" name="phone" required />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="country">Country:</label>
+              <select class="form-control" name="country" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="1">3</option>
+              </select>
+              <small></small>
+            </div>
+            <div class="form-group">
+              <label for="lname">Age:</label>
+              <input type="number" class="form-control" name="age" required />
+              <small></small>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="yes" required />
+                <label class="form-check-label" for="defaultCheck1"> Yes </label>
+              </div>
+              <small></small>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary w-100" type="submit">Submit</button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="assets/js/validator.js"></script>
-    <script>
-        const validator = new FormValidator(document.getElementById("myForm"), {
-            checkRequired: true,
-            checkValues: [{
-                fieldName: "age",
-                value: 30
-            }],
-            validatePhone: true,
-        });
-    </script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="assets/js/validator.js"></script>
+  <script>
+    const validator = new FormValidator(document.getElementById("myForm"));
+  </script>
 </body>
 
 </html>

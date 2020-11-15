@@ -1,5 +1,13 @@
 function FormValidator(form, userOptions = { checkRequired: true, }) {
 
+    // check if form element provided
+    (function () {
+        if (form === null) {
+            throw new Error("Form element does not exist! failed to initialize");
+            return;
+        }
+    })();
+
     // set object global options / settings
     const options = {
 
@@ -29,11 +37,11 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/
     };
 
-    // store custom erros messages
-    let errors = {
-        email: "",
-        phone: "",
-    }
+    // // store custom erros messages
+    // let errors = {
+    //     email: "",
+    //     phone: "",
+    // }
 
     function showError(field, message) {
         let formControl = field.parentElement;
@@ -139,4 +147,5 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
     // event listeners
     form.querySelector('button').addEventListener('click', submitForm);
+    //form.querySelector('.reset').addEventListener('click', submitForm);
 }
