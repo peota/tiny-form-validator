@@ -2,26 +2,34 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
 
     // set object global options / settings
     const options = {
+
         checkRequired: userOptions.checkRequired === undefined ? true : userOptions.checkRequired,
         checkValues: userOptions.checkValues === undefined ? [] : userOptions.checkValues,
         ignoreClassName: userOptions.ignoreClassName === undefined ? "ignore" : userOptions.ignoreClassName,
         validateEmail: userOptions.validateEmail === undefined ? true : userOptions.validate,
         validatePhone: userOptions.validatePhone === undefined ? true : userOptions.validatePhone,
         validateFullName: userOptions.validateFullName === undefined ? false : userOptions.validateFullName
+
     };
 
     // this will determine if the form is valid or not
     let valid = true;
 
-    // extract all fields from the form, return only fields (exclude the buttons)
+    // extract all fields from the form, return only input fields (exclude the buttons)
     const fields = [...form.elements].filter((field) => { return field.tagName !== "BUTTON" });
-    // regex validation codes
+
+    // storing regex validation codes
     const regex = {
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 
         phone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
         name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/
     };
+
+    let errors = {
+        email: "",
+        phone: "",
+    }
 
     function showError(field, message) {
         let formControl = field.parentElement;
