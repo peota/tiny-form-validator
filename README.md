@@ -23,7 +23,7 @@ initialize the validator with the **form element**
 
 **Options**
 
-    You can change the default options by passing **options object** as second argument
+You can change the default options by passing **options object** as second argument
 
     checkRequired: true / false
 	checkValues: [{fieldName: 'age', value:30}] // array of objects
