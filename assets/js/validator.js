@@ -19,6 +19,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         validateDate: userOptions.validateDate === undefined ? true : userOptions.validateDate,
         checkValues: userOptions.checkValues === undefined ? [] : userOptions.checkValues,
         ignoreClassName: userOptions.ignoreClassName === undefined ? "ignore" : userOptions.ignoreClassName,
+        displayErrors: userOptions.displayErrors === undefined ? true : userOptions.displayErrors,
 
     };
 
@@ -55,6 +56,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     // }
 
     function showError(field, message) {
+        if (options.displayErrors === false) return;
         let formControl = field.parentElement;
         if (field.type === "checkbox")
             formControl = field.parentElement.parentElement; // if it's a checkbox, select the parent of parent
@@ -147,11 +149,11 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
     }
 
     function validateDates() {
-        const searchDates = fields.filter((field) => {
+        const searchDateFields = fields.filter((field) => {
             return field.type === 'date';
         });
 
-        if (searchDates.length > 0 && (searchDates.every(date => date.value !== ''))) {
+        if (searchDateFields.length > 0 && (searchDateFields.every(date => date.value !== ''))) {
             searchDates.forEach((date) => {
                 console.log(date.value)
                 if (!regex.date.test(String(moment(date.value).format('DD-MM-YYYY')).toLowerCase())) {
