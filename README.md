@@ -12,6 +12,7 @@
  - Display errors on field inputs
 
 **How to Use?**
+
 Just include the **validator.js** in your project,
 initialize the validator with the **form element**
 	
