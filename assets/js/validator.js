@@ -29,6 +29,7 @@ function FormValidator(form, userOptions = { checkRequired: true, }) {
         name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/
     };
 
+    // store custom erros messages
     let errors = {
         email: "",
         phone: "",
