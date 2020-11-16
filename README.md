@@ -1,6 +1,6 @@
 **A Tiny JavaScript Form Validator (in development)**
 ---
-<img src="https://i.ibb.co/R3djrnx/tinyFV.png"  alt="drawing" width="100%"/>
+<img src="https://i.ibb.co/R3djrnx/tinyFV.png"  alt="drawing"/>
 
 
 **Main Features:**
