@@ -63,9 +63,7 @@ function FormValidator(form, userOptions = {}) {
 
     function showError(field, message) {
         if (options.displayErrors === false) return;
-        let inputParent = field.parentElement;
-        if (field.type === "checkbox")
-            inputParent = field.parentElement.parentElement; // if it's a checkbox, select the parent of parent
+        const inputParent = field.type === 'checkbox' ? field.parentElement.parentElement : field.parentElement;
         inputParent.className = "form-group error";
         inputParent.querySelector("small").innerHTML = message;
     }
