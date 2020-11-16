@@ -36,7 +36,7 @@ You can change the default options by passing **options object** as second argum
     validateDate: [Boolean] true
     displayErrors: [Boolean] true
 
-E.g -
+E.g - 
 
 `const validator = new FormValidator(formEle, {
 validateEmail:false,
