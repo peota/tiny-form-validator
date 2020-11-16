@@ -7,7 +7,6 @@
  - Validate email address
  - Validate phone number
  - Validate credit card number
- - Validate names (full names)
  - Validate dates
  - Validate min max (soon)
  - Display errors on field inputs
@@ -26,7 +25,6 @@ initialize the validator with the **form element**
 You can change the default options by passing **options object** as second argument
 
     checkRequired: true / false
-	checkValues: [{fieldName: 'age', value:30}] // array of objects
 	ignoreClassName: 'ignoreMe' // fields with this class name will not be validate
     validateEmail: true / false
     validatePhone: true / false

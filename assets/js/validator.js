@@ -1,5 +1,4 @@
 function FormValidator(form, userOptions = {}) {
-
     // check if form element provided
     (function () {
         if (form === null) {
@@ -8,13 +7,12 @@ function FormValidator(form, userOptions = {}) {
         }
     })();
 
-    // set object global options / settings
-    const options = {
+    // global settings
+    let options = {
 
         checkRequired: userOptions.checkRequired === undefined ? true : userOptions.checkRequired,
         validateEmail: userOptions.validateEmail === undefined ? true : userOptions.validate,
         validatePhone: userOptions.validatePhone === undefined ? false : userOptions.validatePhone,
-        validateFullName: userOptions.validateFullName === undefined ? false : userOptions.validateFullName,
         validateCreditCard: userOptions.validateCreditCard === undefined ? false : userOptions.validateCreditCard,
         validateDate: userOptions.validateDate === undefined ? true : userOptions.validateDate,
         checkValues: userOptions.checkValues === undefined ? [] : userOptions.checkValues,
@@ -22,6 +20,8 @@ function FormValidator(form, userOptions = {}) {
         displayErrors: userOptions.displayErrors === undefined ? true : userOptions.displayErrors
 
     };
+
+    let changeMe = false;
 
     // will determine if the form is valid or not
     let valid = true;
@@ -32,20 +32,21 @@ function FormValidator(form, userOptions = {}) {
             field.classList.contains(options.ignoreClassName) === false
     });
 
+    /// !put here all fields? (filter)
+
+
     // storing regex validation codes
     const regex = {
+
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-
         phone: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-
         name: /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/,
-
-        creditCards: [{ regex: /^(?:4[0-9]{12}(?:[0-9]{3})?)$/, cardName: "visa" },
-        { regex: /^(?:5[1-5][0-9]{14})$/, cardName: "master card" },
-        { regex: /^(?:3[47][0-9]{13})$/, cardName: "american express" },
-        { regex: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/, cardName: "discover" },
+        creditCards: [
+            { regex: /^(?:4[0-9]{12}(?:[0-9]{3})?)$/, cardName: "visa" },
+            { regex: /^(?:5[1-5][0-9]{14})$/, cardName: "master card" },
+            { regex: /^(?:3[47][0-9]{13})$/, cardName: "american express" },
+            { regex: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/, cardName: "discover" },
         ],
-
         date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
     };
 
@@ -71,10 +72,13 @@ function FormValidator(form, userOptions = {}) {
 
     function checkRequired() {
         let requiredFields = fields.filter(field => field.hasAttribute('required'));
+        // convert to foreach !!!
         for (let field of requiredFields) {
+            // make them shorter?
             if (field.value === '') {
                 showError(field, 'This field is required.');
                 valid = false;
+                // make them shorter? 
             }
             if (field.type === 'checkbox' && !field.checked) {
                 showError(field, 'This field is required.');
@@ -85,7 +89,6 @@ function FormValidator(form, userOptions = {}) {
 
     function validateEmail() {
         const searchEmail = fields.filter(field => field.type === 'email');
-
         if (searchEmail.length !== 0 && searchEmail[0].value !== "") {
             const emailAddress = searchEmail[0].value;
             if (!regex.email.test(String(emailAddress).toLowerCase())) {
@@ -95,9 +98,7 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function validatePhoneNumber() {
-        const searchPhoneNumber = fields.filter((field) => {
-            return field.type === 'tel';
-        });
+        const searchPhoneNumber = fields.filter(field => field.type === 'tel');
         if (searchPhoneNumber.length !== 0 && searchPhoneNumber[0].value !== "") {
             const phoneNumber = searchPhoneNumber[0].value;
             if (!regex.phone.test(String(phoneNumber).toLowerCase())) {
@@ -106,23 +107,8 @@ function FormValidator(form, userOptions = {}) {
         }
     }
 
-    function validateFullName() {
-        const searchName = fields.filter((field) => {
-            return field.name === 'firstName' || field.name === 'lastName';
-        });
-        if (searchName.length === 2 && searchName[0].value !== '' && searchName[1].value !== '') {
-            const fullName = `${searchName[0].value} ${searchName[1].value}`
-
-            if (!regex.name.test(String(fullName).toLowerCase())) {
-                showError(searchName[0], 'Name is not valid.');
-                showError(searchName[1], 'Name is not valid.');
-            }
-        }
-    }
-
     function validateCC() {
         const searchCCField = fields.filter(field => field.name === options.validateCreditCard.fieldName);
-
         if (searchCCField.length === 1 && searchCCField[0].value !== '') {
             const ccNum = searchCCField[0].value;
             let cardName = null;
@@ -143,9 +129,7 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function validateDates() {
-        const searchDateFields = fields.filter((field) => {
-            return field.type === 'date';
-        });
+        const searchDateFields = fields.filter((field) => field.type === 'date');
         if (searchDateFields.length > 0 && (searchDateFields.every(date => date.value !== ''))) {
             searchDateFields.forEach((date) => {
                 console.log(date.value)
@@ -157,19 +141,6 @@ function FormValidator(form, userOptions = {}) {
         }
     }
 
-    // check if specific field is greater than a value
-    function checkValue(fieldName, value) {
-        let searchField = [...form.elements].filter((field) => {
-            return field.name === fieldName;
-        });
-        if (searchField.length === 0) {
-            throw new Error(`Field: '${fieldName}' not found.`);
-        } else if (searchField[0].value !== '' && searchField[0].value < value) {
-            showError(searchField[0], 'This field value has to be greater or equal to ' + value);
-            valid = false;
-        }
-    }
-
     function submitForm(e) {
 
         e.preventDefault();   // prevent form submission
@@ -177,16 +148,15 @@ function FormValidator(form, userOptions = {}) {
         resetErrors();      // clean all error messages
 
         // check options and run the needed validations
-        if (options.checkRequired === true) checkRequired();
-        if (options.checkValues.length > 0) {
-            options.checkValues.forEach(field => checkValue(field.fieldName, field.value));
-        }
-        if (options.validateEmail) validateEmail();
-        if (options.validatePhone) validatePhoneNumber();
-        if (options.validateFullName) validateFullName();
-        if (options.validateCreditCard) validateCC();
-        if (options.validateDate) validateDates();
+        options.checkRequired === true ? checkRequired() : '';
+        options.validateEmail === true ? validateEmail() : '';
+        options.validatePhone === true ? validatePhoneNumber() : '';
+        options.validateCreditCard === true ? validateCC() : '';
+        options.validateDate === true ? validateDates() : '';
 
+        // if (options.checkValues.length > 0) {
+        //     options.checkValues.forEach(field => checkValue(field.fieldName, field.value));
+        // }
         console.log(valid)
 
         if (valid) form.submit();
@@ -194,5 +164,7 @@ function FormValidator(form, userOptions = {}) {
 
     // event listeners
     form.querySelector('button').addEventListener('click', submitForm);
-    //form.querySelector('.reset').addEventListener('click', submitForm);
+
+    // !define a setter for changing options on the fly
+    // Object.defineProperty
 }
