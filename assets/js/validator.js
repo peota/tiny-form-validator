@@ -1,4 +1,4 @@
-function FormValidator(form, userOptions = {}) {
+function FormValidator(form = null, userOptions = {}) {
 
     // check if form element provided
     (function () {
@@ -21,7 +21,6 @@ function FormValidator(form, userOptions = {}) {
 
     };
 
-    let changeMe = false;
     let valid = true; // will determine if the form is valid or not
 
     /* 
@@ -46,6 +45,13 @@ function FormValidator(form, userOptions = {}) {
         date: fields.filter((field) => field.type === 'date')
 
     }
+
+    /* 
+        * this array will contains custom validation methods added on the fly
+        * .... how (?)
+    */
+    let customMethods = [];
+
 
     // storing regex codes
     const regex = {
@@ -78,7 +84,6 @@ function FormValidator(form, userOptions = {}) {
             if (field.value === '') {
                 showError(field, 'This field is required.');
                 valid = false;
-                // make them shorter? 
             }
             if (field.type === 'checkbox' && !field.checked) {
                 showError(field, 'This field is required.');
@@ -153,9 +158,13 @@ function FormValidator(form, userOptions = {}) {
         valid ? form.submit() : '';
     }
 
+    // * custom validation methods *
+    Object.defineProperty(this, 'customMethods', {
+        set: function (f) {
+            customMethods.push(f);
+        }
+    });
+
     // event listeners
     form.querySelector('button').addEventListener('click', submitForm);
-
-    // !define a setter for changing options on the fly
-    // Object.defineProperty
 }
