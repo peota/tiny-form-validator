@@ -1,6 +1,6 @@
 **A Tiny JavaScript Form Validator (in development)**
 ---
-<img src="https://srv-store3.gofile.io/download/46y9E1/tinyFV.png"  alt="drawing"/>
+<img src="https://i.ibb.co/R3djrnx/tinyFV.png"  alt="drawing"/>
 
 
 **Main Features:**
