@@ -46,9 +46,8 @@ displayErrors: false
 });`
 
 **Form Structure**
-Used with 
 
-[Bootstrap 4](https://getbootstrap.com/)
+Built with [Bootstrap 4](https://getbootstrap.com/)
 
 **Example for the HTML structure of an input**
 
