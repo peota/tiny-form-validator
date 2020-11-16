@@ -12,29 +12,43 @@
  - Validate min max (soon)
  - Display errors on field inputs
 
+ **Dependencies**
+ - [MomentJS](https://momentjs.com/)
+
 **How to Use?**
 --
 
-Just include the **validator.js** in your project,
+include **validator.js** and **moment.min.js** in your project,
 initialize the validator with the **form element**
 
-    const formEle = document.getElementById('myForm);
+    const formEle = document.getElementById('myForm');
     const validator = new FormValidator(formEle);
 
 **Options**
 
 You can change the default options by passing **options object** as second argument
 
-    checkRequired: true / false
-	ignoreClassName: 'ignoreMe' // fields with this class name will not be validate
-    validateEmail: true / false
-    validatePhone: true / false
-    validateFullName: true / false
+    checkRequired: [Boolean] true
+	ignoreClassName: [String] 'ignore' // fields with this class name will not be validate
+    validateEmail: [Boolean] true
+    validatePhone: [Boolean] true
+    validateCreditCard: [Object] {fieldsName:'ccNum'}
+    validateDate: [Boolean] true
+    displayErrors: [Boolean] true
 
-E.g - `const validator = new FormValidator(formEle, {validateEmail:false});`
+E.g -
+
+`const validator = new FormValidator(formEle, {
+validateEmail:false,
+validatePhone: true,
+validateCreditCard : {fieldName:'ccNum'},
+displayErrors: false
+});`
 
 **Form Structure**
-Used with [Bootstrap 4](https://getbootstrap.com/)
+Used with 
+
+[Bootstrap 4](https://getbootstrap.com/)
 
 **Example for the HTML structure of an input**
 
