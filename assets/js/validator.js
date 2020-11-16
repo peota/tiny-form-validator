@@ -1,4 +1,5 @@
 function FormValidator(form, userOptions = {}) {
+
     // check if form element provided
     (function () {
         if (form === null) {
@@ -32,8 +33,21 @@ function FormValidator(form, userOptions = {}) {
             field.classList.contains(options.ignoreClassName) === false
     });
 
-    /// !put here all fields? (filter)
+    /* 
+        extract all the unique fields on object initialization
+        in order to prevent some HTML structure manipulation
+    */
+    const customFields = {
 
+        required: fields.filter(field => field.hasAttribute('required')),
+        email: fields.filter(field => field.type === 'email'),
+        phone: fields.filter(field => field.type === 'tel'),
+        creditCard: fields.filter(field => field.name === options.validateCreditCard.fieldName),
+        date: fields.filter((field) => field.type === 'date')
+
+    }
+
+    /// !put here all fields? (filter)
 
     // storing regex validation codes
     const regex = {
@@ -50,12 +64,6 @@ function FormValidator(form, userOptions = {}) {
         date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
     };
 
-    // // store custom erros messages
-    // let errors = {
-    //     email: "",
-    //     phone: "",
-    // }
-
     function showError(field, message) {
         if (options.displayErrors === false) return;
         let formControl = field.parentElement;
@@ -71,9 +79,9 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function checkRequired() {
-        let requiredFields = fields.filter(field => field.hasAttribute('required'));
+        // let requiredFields = fields.filter(field => field.hasAttribute('required'));
         // convert to foreach !!!
-        for (let field of requiredFields) {
+        for (let field of customFields.required) {
             // make them shorter?
             if (field.value === '') {
                 showError(field, 'This field is required.');
@@ -88,18 +96,16 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function validateEmail() {
-        const searchEmail = fields.filter(field => field.type === 'email');
-        if (searchEmail.length !== 0 && searchEmail[0].value !== "") {
-            const emailAddress = searchEmail[0].value;
+        if (customFields.email.length !== 0 && customFields.email[0].value !== "") {
+            const emailAddress = customFields.email[0].value;
             if (!regex.email.test(String(emailAddress).toLowerCase())) {
-                showError(searchEmail[0], 'Email address is not valid.');
+                showError(customFields.email[0], 'Email address is not valid.');
             }
         }
     }
 
     function validatePhoneNumber() {
-        const searchPhoneNumber = fields.filter(field => field.type === 'tel');
-        if (searchPhoneNumber.length !== 0 && searchPhoneNumber[0].value !== "") {
+        if (customField.phone.length !== 0 && searchPhoneNumber[0].value !== "") {
             const phoneNumber = searchPhoneNumber[0].value;
             if (!regex.phone.test(String(phoneNumber).toLowerCase())) {
                 showError(searchPhoneNumber[0], 'Phone number is not valid.');
@@ -108,9 +114,8 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function validateCC() {
-        const searchCCField = fields.filter(field => field.name === options.validateCreditCard.fieldName);
-        if (searchCCField.length === 1 && searchCCField[0].value !== '') {
-            const ccNum = searchCCField[0].value;
+        if (customFields.creditCard.length === 1 && customFields.creditCard.value !== '') {
+            const ccNum = customFields.creditCard[0].value;
             let cardName = null;
             for (let card of regex.creditCards) {
                 if (card.regex.test(String(ccNum).toLowerCase())) {
@@ -129,9 +134,8 @@ function FormValidator(form, userOptions = {}) {
     }
 
     function validateDates() {
-        const searchDateFields = fields.filter((field) => field.type === 'date');
-        if (searchDateFields.length > 0 && (searchDateFields.every(date => date.value !== ''))) {
-            searchDateFields.forEach((date) => {
+        if (customFields.date.length > 0 && (customFields.date.every(date => date.value !== ''))) {
+            customFields.date.forEach((date) => {
                 console.log(date.value)
                 if (!regex.date.test(String(moment(date.value).format('DD-MM-YYYY')).toLowerCase())) {
                     showError(date, 'Date is not valid.');
@@ -153,13 +157,7 @@ function FormValidator(form, userOptions = {}) {
         options.validatePhone === true ? validatePhoneNumber() : '';
         options.validateCreditCard === true ? validateCC() : '';
         options.validateDate === true ? validateDates() : '';
-
-        // if (options.checkValues.length > 0) {
-        //     options.checkValues.forEach(field => checkValue(field.fieldName, field.value));
-        // }
-        console.log(valid)
-
-        if (valid) form.submit();
+        valid ? form.submit() : '';
     }
 
     // event listeners
