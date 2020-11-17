@@ -15,6 +15,7 @@ function FormValidator(form = null, userOptions = {}) {
         validatePhone: userOptions.validatePhone === undefined ? false : userOptions.validatePhone,
         validateCreditCard: userOptions.validateCreditCard === undefined ? false : userOptions.validateCreditCard,
         validateDate: userOptions.validateDate === undefined ? true : userOptions.validateDate,
+        validatURL: userOptions.validatURL === undefined ? false : userOptions.validatURL,
         ignoreClassName: userOptions.ignoreClassName === undefined ? "ignore" : userOptions.ignoreClassName,
         displayErrors: userOptions.displayErrors === undefined ? true : userOptions.displayErrors
 
@@ -41,7 +42,8 @@ function FormValidator(form = null, userOptions = {}) {
         email: fields.filter(field => field.type === 'email'),
         phone: fields.filter(field => field.type === 'tel'),
         creditCard: fields.filter(field => field.name === options.validateCreditCard.fieldName),
-        date: fields.filter((field) => field.type === 'date')
+        date: fields.filter((field) => field.type === 'date'),
+        url: fields.filter((field) => field.name === options.validatURL.fieldName)
 
     }
 
@@ -63,7 +65,9 @@ function FormValidator(form = null, userOptions = {}) {
             { regex: /^(?:3[47][0-9]{13})$/, cardName: "american express" },
             { regex: /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/, cardName: "discover" },
         ],
-        date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+        date: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
+        url: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+
     };
 
     function showError(field, message) {
