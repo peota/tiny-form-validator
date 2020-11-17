@@ -1,10 +1,9 @@
 function FormValidator(form = null, userOptions = {}) {
 
     // check if form element provided
-    (function () {
+    (function() {
         if (form === null) {
-            throw new Error("Form element does not exist! failed to initialize");
-            return;
+            throw new Error("Form element does not exist! failed to initialize.");
         }
     })();
 
@@ -23,7 +22,7 @@ function FormValidator(form = null, userOptions = {}) {
 
     let valid = true; // will determine if the form is valid or not
 
-    /* 
+    /*
         extract all fields from the form, return only input fields,
         NOT including buttons and ignored fields
     */
@@ -32,7 +31,7 @@ function FormValidator(form = null, userOptions = {}) {
             field.classList.contains(options.ignoreClassName) === false
     });
 
-    /* 
+    /*
         extract all the unique fields on object initialization
         in order to user HTML structure manipulation
     */
@@ -46,10 +45,10 @@ function FormValidator(form = null, userOptions = {}) {
 
     }
 
-    /* 
-        * this array will contains custom validation methods added on the fly
-        * .... how (?)
-    */
+    /*
+     * this array will contains custom validation methods added on the fly
+     * .... how (?)
+     */
     let customMethods = [];
 
 
@@ -70,7 +69,7 @@ function FormValidator(form = null, userOptions = {}) {
     function showError(field, message) {
         if (options.displayErrors === false) return;
         const inputParent = field.type === 'checkbox' ? field.parentElement.parentElement : field.parentElement;
-        inputParent.className = "form-group error";
+        inputParent.classList.add('error');
         inputParent.querySelector("small").innerHTML = message;
     }
 
@@ -123,8 +122,7 @@ function FormValidator(form = null, userOptions = {}) {
             if (cardName === null) {
                 valid = false;
                 showError(searchCCField[0], 'Credit card number is not valid.');
-            }
-            else {
+            } else {
                 console.log(cardName)
             }
         }
@@ -143,9 +141,9 @@ function FormValidator(form = null, userOptions = {}) {
 
     function submitForm(e) {
 
-        e.preventDefault();   // prevent form submission
-        valid = true;        // reset the valid flag at form submission
-        resetErrors();      // clean all error messages
+        e.preventDefault(); // prevent form submission
+        valid = true; // reset the valid flag at form submission
+        resetErrors(); // clean all error messages
 
         // check options and run the needed validations
         options.checkRequired === true ? checkRequired() : '';
@@ -160,7 +158,7 @@ function FormValidator(form = null, userOptions = {}) {
 
     // * custom validation methods *
     Object.defineProperty(this, 'customMethods', {
-        set: function (f) {
+        set: function(f) {
             customMethods.push(f);
         }
     });
